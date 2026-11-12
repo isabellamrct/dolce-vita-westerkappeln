@@ -24,17 +24,21 @@ python3 build.py
 
 Die Öffnungszeiten stehen an zwei Stellen: in `build.py` (Tabelle, Fußzeile, Google-Daten) und in `js/main.js` (Live-Anzeige „geöffnet/geschlossen“).
 
-## ⚠️ Vor dem Veröffentlichen prüfen
+## Veröffentlichen
 
-Die Bewertungsportale (Tripadvisor, Google, Restaurant Guru, Facebook) waren bei der Erstellung nicht direkt abrufbar. Folgendes muss mit dem Restaurant abgeglichen werden:
+Die Website besteht nur aus statischen Dateien. Den kompletten Ordner (ohne `.git`, `build.py` und `README.md`) per FTP auf den Webspace hochladen, z. B. bei IONOS, Strato oder All-Inkl. Alternativ kostenlos über GitHub Pages (`.nojekyll` und `404.html` sind vorhanden) oder Netlify.
 
-1. **Speisekarte & Preise** – Gerichte und Preise sind eine realistische Vorlage im Stil einer italienischen Pizzeria im Münsterland, **nicht** die echte Karte. Bitte vollständig mit der aktuellen Karte ersetzen (`MENU` und `DRINKS` in `build.py`).
-2. **Öffnungszeiten** – Quellen widersprechen sich. Verwendet: Mo Ruhetag, Di–Sa 12:00–14:30 & 17:00–22:00, So 13:00–22:00.
-3. **Bewertungen** – Tripadvisor 5,0 von 5 ist belegt. Die Zitate stammen aus Suchergebnis-Auszügen der Tripadvisor-Bewertungen und sind teils gekürzt/sinngemäß. Bitte den genauen Wortlaut auf Tripadvisor prüfen und echte Google-Rezensionen ergänzen (`REVIEWS` in `build.py`). Die Google-Gesamtnote ist bewusst nicht angegeben, bis sie bestätigt ist.
-4. **Über uns** – Texte sind allgemein gehalten. Abholung ist bestätigt; Angaben zu Feiern/Gruppen bestätigen lassen und gern mit der echten Geschichte (Inhaber, seit wann) ergänzen.
-5. **Impressum & Datenschutz** – gelb markierte Platzhalter (Inhaber, E-Mail, USt-IdNr., Hoster) ausfüllen.
-6. **Fotos** – sobald eigene Fotos vorliegen (Speisen, Gastraum), in `img/` ablegen und einbinden. Bewusst keine Stockfotos.
-7. **Schriften** – für maximale DSGVO-Sicherheit Cormorant Garamond und Work Sans lokal hosten (z. B. via google-webfonts-helper) und den `@import` in `css/style.css` ersetzen.
+- Schriften sind lokal eingebunden (`fonts/`), es werden **keine** Cookies gesetzt und keine externen Dienste geladen.
+- `robots.txt` erlaubt die Indexierung. Nach dem Livegang die Website-Adresse im Google-Unternehmensprofil, bei Tripadvisor, Instagram und Facebook eintragen.
+
+## ⚠️ Vor dem Livegang ausfüllen bzw. prüfen
+
+1. **Impressum & Datenschutz** – gelb markierte Platzhalter (Inhaber, E-Mail, USt-IdNr., Hoster). **Ohne vollständiges Impressum nicht veröffentlichen.**
+2. **Speisekarte & Preise** – Instagram und Google waren nicht abrufbar (Login bzw. Sperre). Gerichte und Preise sind eine Vorlage im Stil der Pizzeria, **nicht** die echte Karte. Mit der aktuellen Karte abgleichen (`MENU` und `DRINKS` in `build.py`), dann `python3 build.py`.
+3. **Bewertungen** – auf der Seite stehen nur wörtlich belegte Zitate (Tripadvisor, TikTok @umuditestet). Weitere Google-Rezensionen können in `REVIEWS` ergänzt werden – am besten mit Vorname + Initial und nur mit wörtlichem Text.
+4. **Fotos** – eigene Fotos (Instagram des Restaurants) können in `img/` abgelegt und eingebunden werden. Keine Gästefotos von Google ohne Erlaubnis verwenden (Urheberrecht).
+
+Bestätigt: Öffnungszeiten, Telefonnummer, Abholung. Keine glutenfreie Pasta.
 
 ## Lokal ansehen
 

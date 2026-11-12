@@ -13,6 +13,8 @@ ROUTE = "https://www.google.com/maps/dir/?api=1&destination=Vidumstra%C3%9Fe+1%2
 OSM = "https://www.openstreetmap.org/search?query=Vidumstra%C3%9Fe%201%2C%2049492%20Westerkappeln"
 TRIP = "https://www.tripadvisor.de/Restaurant_Review-g3331348-d24987084-Reviews-Dolce_vita-Westerkappeln_North_Rhine_Westphalia.html"
 FB = "https://www.facebook.com/p/Dolce-vita-100069733084038/"
+IG = "https://www.instagram.com/dolcevita_westerkappeln/"
+TT = "https://www.tiktok.com/@umuditestet/video/7616672092297170198"
 
 NAV = [
     ("index.html", "Start"),
@@ -45,8 +47,6 @@ def head(title, desc, extra=""):
 <meta property="og:description" content="{desc}">
 <meta property="og:locale" content="de_DE">
 <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 {extra}</head>
 <body>
@@ -91,7 +91,7 @@ def footer():
     <div class="footer-grid">
       <div>
         <span class="brand-name" style="font-family:var(--serif);font-style:italic;font-weight:600">Dolce Vita</span>
-        <p style="margin-top:.6rem">Italienische Küche im Ortskern von Westerkappeln – mitten im Tecklenburger Land.</p>
+        <p style="margin-top:.6rem">Ristorante &amp; Pizzeria an der Vidumstraße in Westerkappeln.</p>
       </div>
       <div>
         <h4>Besuchen</h4>
@@ -105,6 +105,7 @@ def footer():
         <h4>Kontakt</h4>
         <ul>
           <li><a href="tel:{PHONE_LINK}">{PHONE}</a></li>
+          <li><a href="{IG}" rel="noopener">Instagram</a></li>
           <li><a href="{FB}" rel="noopener">Facebook</a></li>
           <li><a href="{TRIP}" rel="noopener">Tripadvisor</a></li>
         </ul>
@@ -125,9 +126,8 @@ def footer():
 def cta():
     return f"""<section class="section section-dark cta-band">
   <div class="wrap">
-    <span class="eyebrow">Reservierung</span>
-    <h2>Ein Tisch für heute Abend?</h2>
-    <p>Wir haben nur wenige Plätze – rufen Sie am besten kurz an. Auch Bestellungen zum Abholen nehmen wir gern telefonisch entgegen.</p>
+    <h2>Reservieren oder zum Abholen bestellen</h2>
+    <p>Einfach anrufen – wir nehmen Ihre Reservierung oder Bestellung gern telefonisch entgegen.</p>
     <a class="phone-big" href="tel:{PHONE_LINK}">{PHONE}</a>
   </div>
 </section>
@@ -175,7 +175,7 @@ MENU = [
         ("32", "Frutti di mare", "Meeresfrüchte, Knoblauch, Petersilie", "14,90", None),
         ("33", "Pizza Dolce Vita", "Unsere Hauspizza: Salsiccia, Friarielli, Fior di Latte, Parmesan", "14,90", "house"),
     ]),
-    ("pasta", "Pasta &amp; Risotto", "Hausgemachte Saucen, frisch zubereitet.", [
+    ("pasta", "Pasta &amp; Risotto", "", [
         ("40", "Spaghetti al pomodoro", "Tomatensauce und Basilikum", "9,90", "veg"),
         ("41", "Spaghetti aglio, olio e peperoncino", "Knoblauch, Olivenöl, Chili, Petersilie", "10,50", "veg"),
         ("42", "Penne all'arrabbiata", "Pikante Tomatensauce mit Knoblauch und Chili", "10,90", "veg"),
@@ -296,7 +296,7 @@ def menu_page():
         if sid == "pizza":
             extra = '        <p style="margin:1rem 0 0;font-size:.92rem;color:var(--ink-soft)">Jede weitere Zutat 1,50 € · Büffelmozzarella oder Parmaschinken 2,50 €</p>\n'
         secs.append(f"""      <section class="menu-section" id="{sid}">
-        <header><h2>{title}</h2><p>{intro}</p></header>
+        <header><h2>{title}</h2>{"<p>" + intro + "</p>" if intro else ""}</header>
 {rows}{extra}      </section>
 """)
     nav.append('<li><a href="#getraenke">Getränke</a></li>')
@@ -313,9 +313,8 @@ def menu_page():
 
     body = f"""<section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">La carta</span>
     <h1>Speisekarte</h1>
-    <p>Klassische italienische Küche, frisch zubereitet. Fragen Sie auch nach unseren wechselnden Tagesempfehlungen – die stehen an der Tafel im Restaurant.</p>
+    <p>Alle Gerichte auch zum Abholen – telefonisch bestellen unter <a href="tel:{PHONE_LINK}">{PHONE}</a>. Neues und Aktionen zeigen wir auf <a href="{IG}" rel="noopener">Instagram</a>.</p>
   </div>
 </section>
 
@@ -344,21 +343,25 @@ def menu_page():
 
 # ------------------------------------------------------------------ Bewertungen
 REVIEWS = [
-    ("Bestes Restaurant in Westerkappeln", "Tripadvisor", "Titel einer Gästebewertung"),
-    ("Klein aber fein … Gehobene Küche, gut getarnt.", "Tripadvisor", "Gästebewertung"),
-    ("Mehr als eine klassische Pizzeria – feine Küche mit viel Liebe zu besonderem, kreativem Geschmack.", "Tripadvisor", "Gästebewertung, Auszug"),
-    ("Ein echter Insidertipp – und das zu fast günstigen Preisen.", "Tripadvisor", "Gästebewertung, Auszug"),
-    ("Das Essen ist immer sehr gut, die Bedienung aufmerksam.", "Tripadvisor", "Gästebewertung, Auszug"),
-    ("Essen, Service und Preis-Leistung – alles stimmt.", "Tripadvisor", "Gästebewertung aus Osnabrück, Auszug"),
+    ("Klein aber fein … Gehobene Küche, gut getarnt.", "Tripadvisor", "Gästebewertung", TRIP),
+    ("Bestes Restaurant in Westerkappeln", "Tripadvisor", "Gästebewertung", "https://www.tripadvisor.de/ShowUserReviews-g3331348-d24987084-r861253359-Dolce_vita-Westerkappeln_North_Rhine_Westphalia.html"),
+    ("Das war absolut lecker", "TikTok", "@umuditestet", TT),
+]
+
+# Was Gäste in ihren Bewertungen hervorheben (Zusammenfassung, keine wörtlichen Zitate)
+PRAISE = [
+    ("Mehr als eine Pizzeria", "Gäste beschreiben die Küche als fein und kreativ – deutlich mehr als eine klassische Pizzeria."),
+    ("Faire Preise", "Mehrfach gelobt: das Preis-Leistungs-Verhältnis. Ein Gast nennt das Dolce Vita einen echten Insidertipp."),
+    ("Aufmerksamer Service", "Das Essen sei immer sehr gut, die Bedienung aufmerksam – auch Gäste aus Osnabrück kommen gern wieder."),
 ]
 
 
 def quotes_block(items):
     out = []
-    for q, src, note in items:
+    for q, src, note, url in items:
         out.append(f"""      <figure class="quote">
         <blockquote>{q}</blockquote>
-        <figcaption>{note} · {src}</figcaption>
+        <figcaption>{note} · <a href="{url}" rel="noopener">{src}</a></figcaption>
       </figure>
 """)
     return "".join(out)
@@ -370,28 +373,14 @@ def ratings_row():
         <span class="score">5,0</span>
         <span class="meta"><span class="stars" aria-label="5 von 5 Punkten">★★★★★</span><strong>Tripadvisor</strong><a href="{TRIP}" rel="noopener">Alle Bewertungen lesen</a></span>
       </div>
-      <div class="rating">
-        <span class="score" style="font-size:2.2rem">G</span>
-        <span class="meta"><strong>Google-Rezensionen</strong><a href="{MAPS}" rel="noopener">Bewertungen auf Google ansehen</a></span>
+      <div class="rating" style="align-self:center">
+        <span class="meta"><strong>Google-Rezensionen</strong><a href="{MAPS}" rel="noopener">Bewertungen auf Google lesen</a></span>
       </div>
     </div>"""
 
 
 # ------------------------------------------------------------------ Seiten
 def index_page():
-    picks = [
-        ("Aus dem Ofen", "Pizza Dolce Vita", "Unsere Hauspizza mit Salsiccia, Friarielli und Fior di Latte.", "14,90"),
-        ("Hausrezept", "Saltimbocca alla romana", "Kalbsschnitzel mit Parmaschinken und frischem Salbei.", "21,90"),
-        ("Zum Schluss", "Tiramisù della casa", "Täglich frisch, nach dem Rezept des Hauses.", "6,90"),
-    ]
-    pick_html = "".join(f"""      <article class="pick">
-        <span class="tag">{t}</span>
-        <h3>{n}</h3>
-        <p>{d}</p>
-        <span class="price">{p} €</span>
-      </article>
-""" for t, n, d, p in picks)
-
     schema = f"""<script type="application/ld+json">
 {{
   "@context": "https://schema.org",
@@ -415,20 +404,31 @@ def index_page():
   ],
   "hasMenu": "speisekarte.html",
   "acceptsReservations": "True",
-  "sameAs": ["{TRIP}", "{FB}"]
+  "sameAs": ["{IG}", "{FB}", "{TRIP}"]
 }}
 </script>
 """
 
+    cats = [
+        ("antipasti", "Antipasti", "Bruschetta, Carpaccio, Vitello tonnato"),
+        ("pizza", "Pizze", "Klassiker und Pizza Dolce Vita"),
+        ("pasta", "Pasta &amp; Risotto", "Von Aglio e olio bis Frutti di mare"),
+        ("carne", "Carne &amp; Pesce", "Saltimbocca, Filetto, Fisch vom Grill"),
+        ("dolci", "Dolci", "Tiramisù, Panna cotta, Affogato"),
+        ("getraenke", "Getränke", "Aperitivo, offene Weine, Caffè"),
+    ]
+    cat_html = "".join(f"""      <li><a href="speisekarte.html#{a}"><span class="cat-name">{n}</span><span class="cat-desc">{d}</span></a></li>
+""" for a, n, d in cats)
+
     body = f"""<section class="hero">
   <div class="wrap hero-grid">
     <div>
-      <span class="eyebrow">Ristorante &amp; Pizzeria im Ortskern</span>
-      <h1>Ein Stück Italien in <em>Westerkappeln</em>.</h1>
-      <p class="lead">Klein, herzlich und mit Sorgfalt gekocht: Pizza, hausgemachte Pasta und italienische Klassiker – an der Vidumstraße, mitten im Ort.</p>
+      <p class="hero-place">{ADDR1} · Westerkappeln</p>
+      <h1>Pizza, Pasta und italienische Küche – <em>mitten im Ort.</em></h1>
+      <p class="lead">Ristorante und Pizzeria im Ortskern von Westerkappeln. Mittags und abends geöffnet, montags Ruhetag. Alles von der Karte gibt es auch zum Abholen.</p>
       <div class="hero-actions">
-        <a class="btn" href="tel:{PHONE_LINK}">Tisch reservieren · {PHONE}</a>
-        <a class="btn btn-ghost" href="speisekarte.html">Zur Speisekarte</a>
+        <a class="btn" href="tel:{PHONE_LINK}">Anrufen: {PHONE}</a>
+        <a class="btn btn-ghost" href="speisekarte.html">Speisekarte</a>
       </div>
     </div>
     <aside class="hero-card" aria-labelledby="oz">
@@ -440,66 +440,40 @@ def index_page():
 </section>
 
 <section class="section section-alt">
-  <div class="wrap two-col">
-    <div>
-      <span class="eyebrow">Benvenuti</span>
-      <h2>Klein aber fein.</h2>
-    </div>
-    <div class="prose">
-      <p class="drop">So haben uns Gäste auf Tripadvisor beschrieben – und besser können wir es selbst kaum sagen. Das Dolce Vita ist kein großes Haus, sondern ein Restaurant, in dem man sich kennt: Stammgäste aus Westerkappeln, Familien aus dem Tecklenburger Land und Gäste, die aus Osnabrück, Mettingen oder Ibbenbüren herüberkommen.</p>
-      <p>Auf den Tisch kommt ehrliche italienische Küche – vom knusprigen Pizzabrot bis zum Kalbsschnitzel in Zitronensauce. Und hinterher ein Espresso, so wie er sein soll.</p>
-      <p><a href="ueber-uns.html">Mehr über uns</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Consigliato</span>
-      <h2>Was Gäste immer wieder bestellen</h2>
-      <p>Drei Gerichte aus unserer Karte – die ganze Auswahl finden Sie auf der Speisekarte.</p>
+    <div class="split-head">
+      <h2>Aus der Karte</h2>
+      <a href="speisekarte.html">Ganze Speisekarte mit Preisen</a>
     </div>
-    <div class="picks">
-{pick_html}    </div>
-    <p style="margin-top:2rem"><a class="btn btn-ghost" href="speisekarte.html">Ganze Speisekarte ansehen</a></p>
+    <ul class="cat-list">
+{cat_html}    </ul>
   </div>
 </section>
 
 <section class="section section-dark">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow">Gäste über uns</span>
-      <h2>5,0 von 5 auf Tripadvisor</h2>
-    </div>
+    <h2 style="margin-bottom:2.2rem">Was Gäste sagen</h2>
     <div class="quotes">
-{quotes_block(REVIEWS[1:4])}    </div>
-    <p style="margin-top:2.2rem"><a href="bewertungen.html">Weitere Stimmen lesen</a></p>
+{quotes_block(REVIEWS)}    </div>
+    <p style="margin-top:2.2rem"><a href="bewertungen.html">Mehr Bewertungen</a></p>
   </div>
 </section>
 
 <section class="section">
-  <div class="wrap">
-    <div class="pillars">
-      <div class="pillar">
-        <span class="num">uno</span>
-        <h3>Frisch gekocht</h3>
-        <p>Saucen, Teig und Dolci bereiten wir selbst zu. Wenn etwas aus ist, ist es aus – dafür schmeckt es am nächsten Tag wieder wie es soll.</p>
-      </div>
-      <div class="pillar">
-        <span class="num">due</span>
-        <h3>Faire Preise</h3>
-        <p>Gutes Essen muss kein besonderer Anlass sein. Bei uns isst man auch unter der Woche ganz entspannt zu Mittag.</p>
-      </div>
-      <div class="pillar">
-        <span class="num">tre</span>
-        <h3>Mitten im Ort</h3>
-        <p>Im Ortskern von Westerkappeln, schnell erreichbar aus Osnabrück und dem ganzen Tecklenburger Land.</p>
-      </div>
+  <div class="wrap two-col">
+    <div>
+      <h2>Zum Abholen</h2>
+      <p style="color:var(--ink-soft)">Rufen Sie an, bestellen Sie von der Karte und holen Sie Ihr Essen zur vereinbarten Zeit an der Vidumstraße ab.</p>
+      <p><a class="btn btn-ghost" href="tel:{PHONE_LINK}">{PHONE}</a></p>
+    </div>
+    <div>
+      <h2>Anfahrt</h2>
+      <p style="color:var(--ink-soft)">{ADDR1}, {ADDR2} – im Ortskern, wenige Minuten vom Lotter Kreuz und rund 20 Minuten von Osnabrück.</p>
+      <p><a class="btn btn-ghost" href="{ROUTE}" rel="noopener">Route planen</a></p>
     </div>
   </div>
 </section>
-""" + cta()
+"""
     page("index.html", "Dolce Vita – Ristorante & Pizzeria in Westerkappeln",
          "Italienisches Restaurant und Pizzeria im Ortskern von Westerkappeln. Pizza, Pasta, Fleisch und Fisch – Vidumstraße 1, Telefon 05404 7009405.",
          "index.html", body, schema)
@@ -508,28 +482,27 @@ def index_page():
 def about_page():
     body = f"""<section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Chi siamo</span>
     <h1>Über uns</h1>
-    <p>Ein kleines italienisches Restaurant mitten in Westerkappeln – und ein Ort, an dem man gern länger sitzen bleibt.</p>
+    <p>Ein kleines italienisches Restaurant an der Vidumstraße, mitten in Westerkappeln.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap two-col">
     <div class="prose">
-      <h2>Gute Küche braucht keinen großen Saal.</h2>
-      <p class="drop">Das Dolce Vita liegt an der Vidumstraße im Ortskern. Ein paar Tische, eine kleine Küche, ein Team, das seine Gäste beim Namen kennt. Wer zum ersten Mal kommt, ist oft überrascht, was aus einer so kleinen Küche alles auf den Teller kommt.</p>
-      <p>Wir kochen italienisch, wie wir es selbst gern essen: Pizza mit lange gereiftem Teig, Pasta mit Saucen, die Zeit bekommen, Kalb mit Salbei und Zitrone, Fisch aus dem Ofen. Dazu offene Weine aus Venetien, den Abruzzen und Apulien.</p>
-      <p>Neben der festen Karte gibt es wechselnde Tagesempfehlungen – je nachdem, was die Saison und der Markt gerade hergeben.</p>
+      <h2>Klein aber fein.</h2>
+      <p class="drop">So hat ein Gast auf Tripadvisor das Dolce Vita beschrieben, und das trifft es. Das Restaurant liegt im Ortskern von Westerkappeln, an der Vidumstraße. Hierher kommen Gäste aus dem Ort, aus dem Tecklenburger Land und aus Osnabrück.</p>
+      <p>Auf der Karte stehen Pizza, Pasta und Risotto, Fleisch- und Fischgerichte, Antipasti und Dolci. Dazu italienische Weine, Aperitivo und Espresso.</p>
+      <p>Was es aktuell Neues gibt, zeigen wir auf <a href="{IG}" rel="noopener">Instagram</a>.</p>
     </div>
     <div>
       <div class="rule">{OLIVE_SVG}</div>
       <h3>Für Familienfeiern &amp; Gruppen</h3>
-      <p style="color:var(--ink-soft)">Geburtstag, Konfirmation, Kommunion oder einfach ein Abend mit Freunden: Für kleinere Gesellschaften stellen wir gern ein Menü oder eine Antipasti-Auswahl zusammen. Sprechen Sie uns rechtzeitig an.</p>
+      <p style="color:var(--ink-soft)">Sie planen einen Abend mit Familie, Freunden oder Kollegen? Rufen Sie uns an, dann besprechen wir, was möglich ist.</p>
       <h3 style="margin-top:2rem">Zum Abholen</h3>
       <p style="color:var(--ink-soft)">Alle Gerichte der Karte können Sie telefonisch unter <a href="tel:{PHONE_LINK}">{PHONE}</a> bestellen und zur vereinbarten Zeit bei uns abholen.</p>
-      <h3 style="margin-top:2rem">Auf Ihre Wünsche</h3>
-      <p style="color:var(--ink-soft)">Vegetarisch oder für Kinder eine halbe Portion – fragen Sie einfach. Wenn es irgendwie geht, machen wir es möglich.</p>
+      <h3 style="margin-top:2rem">Vegetarisch</h3>
+      <p style="color:var(--ink-soft)">Vegetarische Gerichte sind auf der Speisekarte gekennzeichnet. Bei Allergien und Unverträglichkeiten sprechen Sie uns bitte vor der Bestellung an.</p>
     </div>
   </div>
 </section>
@@ -537,7 +510,6 @@ def about_page():
 <section class="section section-alt">
   <div class="wrap">
     <div class="section-head">
-      <span class="eyebrow">Westerkappeln</span>
       <h2>Zwischen Münsterland und Osnabrücker Land</h2>
       <p>Westerkappeln liegt am Rand des Tecklenburger Landes, nur wenige Minuten vom Lotter Kreuz und von Osnabrück entfernt. Ob nach einer Radtour am Mittellandkanal, einem Spaziergang durch den Ortskern oder auf dem Heimweg von der Arbeit – bei uns kehren Sie ganz unkompliziert ein.</p>
     </div>
@@ -553,18 +525,21 @@ def about_page():
 def reviews_page():
     cards = "".join(f"""      <article class="review">
         <div class="review-head">
-          <span class="stars" aria-label="5 von 5 Punkten">★★★★★</span>
-          <span class="source">{src}</span>
+          <span class="source"><a href="{url}" rel="noopener">{src}</a></span>
+          <span style="font-size:.85rem;color:var(--ink-soft)">{note}</span>
         </div>
         <h3>„{q}“</h3>
-        <p style="margin-top:.4rem;font-size:.88rem">{note}</p>
       </article>
-""" for q, src, note in REVIEWS)
+""" for q, src, note, url in REVIEWS)
+    praise = "".join(f"""      <div>
+        <h3>{t}</h3>
+        <p>{d}</p>
+      </div>
+""" for t, d in PRAISE)
     body = f"""<section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Recensioni</span>
-    <h1>Gäste über uns</h1>
-    <p>Was unsere Gäste auf Tripadvisor und Google schreiben. Danke für jedes Wort – auch für die Hinweise, an denen wir weiter arbeiten.</p>
+    <h1>Bewertungen</h1>
+    <p>Danke an alle, die sich die Zeit nehmen, über ihren Besuch zu schreiben.</p>
   </div>
 </section>
 
@@ -573,21 +548,28 @@ def reviews_page():
     {ratings_row()}
     <div class="review-list">
 {cards}    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="wrap">
+    <h2 style="margin-bottom:2rem">Was Gäste besonders hervorheben</h2>
+    <div class="info-grid">
+{praise}    </div>
     <div class="menu-note" style="margin-top:2.5rem">
-      <p>Sie waren bei uns zu Gast? Wir freuen uns über Ihre Bewertung auf <a href="{MAPS}" rel="noopener">Google</a> oder <a href="{TRIP}" rel="noopener">Tripadvisor</a>. Zitate gekürzt; die vollständigen Bewertungen finden Sie auf den jeweiligen Portalen.</p>
+      <p>Zusammengefasst aus Bewertungen auf Tripadvisor. Alle Bewertungen im Original finden Sie auf <a href="{MAPS}" rel="noopener">Google</a> und <a href="{TRIP}" rel="noopener">Tripadvisor</a> – dort freuen wir uns auch über Ihre.</p>
     </div>
   </div>
 </section>
 """ + cta()
     page("bewertungen.html", "Bewertungen – Dolce Vita Westerkappeln",
-         "Gästebewertungen des Dolce Vita in Westerkappeln: 5,0 von 5 auf Tripadvisor. Stimmen von Gästen zu Pizza, Pasta und Service.",
+         "Gästebewertungen des Dolce Vita in Westerkappeln: 5,0 von 5 auf Tripadvisor.",
          "bewertungen.html", body)
 
 
 def contact_page():
     body = f"""<section class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Contatti</span>
     <h1>Kontakt &amp; Anfahrt</h1>
     <p>Reservierungen und Bestellungen zum Abholen nehmen wir telefonisch entgegen.</p>
   </div>
@@ -618,7 +600,6 @@ def contact_page():
 <section class="section section-alt">
   <div class="wrap two-col">
     <div>
-      <span class="eyebrow">So finden Sie uns</span>
       <h2>Anfahrt</h2>
       <p style="color:var(--ink-soft)">Das Restaurant liegt im Ortskern von Westerkappeln. Parkmöglichkeiten finden Sie in den umliegenden Straßen und auf den öffentlichen Parkplätzen im Zentrum.</p>
       <p><a href="{MAPS}" rel="noopener">In Google Maps öffnen</a> · <a href="{OSM}" rel="noopener">In OpenStreetMap öffnen</a></p>
@@ -678,13 +659,13 @@ def datenschutz_page():
     <p>Beim Aufruf dieser Website werden durch den Hosting-Anbieter {T}[Name und Anschrift des Hosters]{E} automatisch Informationen in Server-Logfiles gespeichert, die Ihr Browser übermittelt (IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Referrer, Browser und Betriebssystem). Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO; unser berechtigtes Interesse liegt im sicheren und stabilen Betrieb der Website. Die Daten werden nach {T}[x]{E} Tagen gelöscht.</p>
 
     <h2>3. Schriftarten</h2>
-    <p>Diese Website nutzt Schriftarten von Google Fonts. Beim Aufruf einer Seite lädt Ihr Browser die Schriftarten von Servern der Google Ireland Limited; dabei wird Ihre IP-Adresse an Google übermittelt. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. <em>Empfehlung: Die Schriften lokal einbinden – dann entfällt dieser Abschnitt (siehe README).</em></p>
+    <p>Die verwendeten Schriftarten sind lokal auf unserem Server gespeichert. Beim Aufruf der Website wird keine Verbindung zu Servern Dritter (z. B. Google) hergestellt.</p>
 
     <h2>4. Cookies und Tracking</h2>
     <p>Diese Website setzt keine Cookies und verwendet keine Analyse- oder Tracking-Werkzeuge.</p>
 
     <h2>5. Externe Links</h2>
-    <p>Links zu Google Maps, OpenStreetMap, Tripadvisor und Facebook werden erst beim Anklicken aufgerufen. Erst dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+    <p>Links zu Google Maps, OpenStreetMap, Tripadvisor, Instagram, TikTok und Facebook werden erst beim Anklicken aufgerufen. Erst dann gelten die Datenschutzbestimmungen des jeweiligen Anbieters.</p>
 
     <h2>6. Kontaktaufnahme per Telefon oder E-Mail</h2>
     <p>Wenn Sie uns zur Reservierung oder Bestellung kontaktieren, verarbeiten wir Ihre Angaben (z. B. Name, Telefonnummer, Datum, Personenzahl) ausschließlich zur Bearbeitung Ihrer Anfrage (Art. 6 Abs. 1 lit. b DSGVO) und löschen sie, sobald sie nicht mehr benötigt werden.</p>
@@ -698,5 +679,17 @@ def datenschutz_page():
          '<meta name="robots" content="noindex">\n')
 
 
-index_page(); menu_page(); about_page(); reviews_page(); contact_page(); impressum_page(); datenschutz_page()
+def notfound_page():
+    body = """<section class="page-head" style="border:0;padding-bottom:6rem">
+  <div class="wrap">
+    <h1>Seite nicht gefunden</h1>
+    <p>Diese Seite gibt es leider nicht (mehr). <a href="index.html">Zur Startseite</a> oder direkt zur <a href="speisekarte.html">Speisekarte</a>.</p>
+  </div>
+</section>
+"""
+    page("404.html", "Seite nicht gefunden – Dolce Vita Westerkappeln", "Seite nicht gefunden.", None, body,
+         '<meta name="robots" content="noindex">\n')
+
+
+notfound_page(); index_page(); menu_page(); about_page(); reviews_page(); contact_page(); impressum_page(); datenschutz_page()
 print("ok")

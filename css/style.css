@@ -2,7 +2,14 @@
    Warmes Papier, Olive und Terrakotta: italienische Küche im Ortskern
    des Tecklenburger Landes. Bewusst ruhig, typografisch, ohne Effekthascherei. */
 
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Work+Sans:wght@400;500;600&display=swap");
+/* Schriften lokal eingebunden (SIL Open Font License, siehe fonts/) – keine Verbindung zu Google. */
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Cormorant Garamond"; src: url("../fonts/cormorant-garamond-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; font-display: swap; }
+@font-face { font-family: "Work Sans"; src: url("../fonts/work-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Work Sans"; src: url("../fonts/work-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Work Sans"; src: url("../fonts/work-sans-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; font-display: swap; }
 
 :root {
   --paper: #f6f1e7;
@@ -155,7 +162,7 @@ p { margin: 0 0 1em; }
 .btn:hover { background: var(--terra-dark); border-color: var(--terra-dark); }
 .btn-ghost { background: transparent; color: var(--ink) !important; border-color: var(--ink); }
 .btn-ghost:hover { background: var(--ink); color: var(--white) !important; border-color: var(--ink); }
-.btn-small { padding: .5rem 1rem; font-size: .88rem; }
+.btn-small { padding: .55rem 1.1rem; font-size: .88rem; }
 
 /* ---------- Hero ---------- */
 
@@ -376,4 +383,28 @@ p { margin: 0 0 1em; }
   .topbar, .site-header, .site-footer, .menu-nav, .cta-band { display: none; }
   body { background: #fff; }
   .menu-layout { display: block; }
+}
+
+/* ---------- Startseite: Ort, Kartenübersicht ---------- */
+
+.hero-place {
+  font-size: .9rem; color: var(--ink-soft); margin-bottom: 1.2rem;
+  padding-left: .9rem; border-left: 2px solid var(--terra);
+}
+
+.split-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .5rem 2rem; margin-bottom: 1.8rem; }
+.split-head h2 { margin: 0; }
+
+.cat-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 3.5rem; border-top: 1px solid var(--ink); }
+.cat-list a {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+  padding: 1.05rem 0; border-bottom: 1px solid var(--line); text-decoration: none; color: var(--ink);
+}
+.cat-list .cat-name { font-family: var(--serif); font-size: 1.6rem; font-weight: 600; line-height: 1.1; }
+.cat-list .cat-desc { font-size: .9rem; color: var(--ink-soft); text-align: right; }
+.cat-list a:hover .cat-name { color: var(--terra-dark); }
+@media (max-width: 760px) {
+  .cat-list { grid-template-columns: 1fr; }
+  .cat-list a { flex-direction: column; gap: .15rem; }
+  .cat-list .cat-desc { text-align: left; }
 }
