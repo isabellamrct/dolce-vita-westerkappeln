@@ -175,7 +175,7 @@ MENU = [
         ("32", "Frutti di mare", "Meeresfrüchte, Knoblauch, Petersilie", "14,90", None),
         ("33", "Pizza Dolce Vita", "Unsere Hauspizza: Salsiccia, Friarielli, Fior di Latte, Parmesan", "14,90", "house"),
     ]),
-    ("pasta", "Pasta &amp; Risotto", "Alle Nudelgerichte auch mit glutenfreier Pasta (+ 1,50 €).", [
+    ("pasta", "Pasta &amp; Risotto", "Hausgemachte Saucen, frisch zubereitet.", [
         ("40", "Spaghetti al pomodoro", "Tomatensauce und Basilikum", "9,90", "veg"),
         ("41", "Spaghetti aglio, olio e peperoncino", "Knoblauch, Olivenöl, Chili, Petersilie", "10,50", "veg"),
         ("42", "Penne all'arrabbiata", "Pikante Tomatensauce mit Knoblauch und Chili", "10,90", "veg"),
@@ -330,7 +330,7 @@ def menu_page():
     <div>
 {"".join(secs)}
       <div class="menu-note">
-        <p><strong>Allergene &amp; Zusatzstoffe:</strong> Informationen zu Allergenen und kennzeichnungspflichtigen Zusatzstoffen erhalten Sie jederzeit bei unserem Service-Team. Viele Gerichte bereiten wir auf Wunsch auch ohne Gluten, Laktose oder Fleisch zu – sprechen Sie uns einfach an.</p>
+        <p><strong>Allergene &amp; Zusatzstoffe:</strong> Informationen zu Allergenen und kennzeichnungspflichtigen Zusatzstoffen erhalten Sie jederzeit bei unserem Service-Team. Bei Unverträglichkeiten sprechen Sie uns bitte vor der Bestellung an.</p>
         <p>Alle Preise in Euro inklusive der gesetzlichen Mehrwertsteuer. Irrtümer und Änderungen vorbehalten.</p>
       </div>
     </div>
@@ -529,7 +529,7 @@ def about_page():
       <h3 style="margin-top:2rem">Zum Abholen</h3>
       <p style="color:var(--ink-soft)">Alle Gerichte der Karte können Sie telefonisch unter <a href="tel:{PHONE_LINK}">{PHONE}</a> bestellen und zur vereinbarten Zeit bei uns abholen.</p>
       <h3 style="margin-top:2rem">Auf Ihre Wünsche</h3>
-      <p style="color:var(--ink-soft)">Vegetarisch, ohne Gluten oder für Kinder eine halbe Portion – fragen Sie einfach. Wenn es irgendwie geht, machen wir es möglich.</p>
+      <p style="color:var(--ink-soft)">Vegetarisch oder für Kinder eine halbe Portion – fragen Sie einfach. Wenn es irgendwie geht, machen wir es möglich.</p>
     </div>
   </div>
 </section>
